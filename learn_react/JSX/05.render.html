@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          isLogin: true
+        }
+      }
+
+      render() {
+        let welcome = null
+        if(this.state.isLogin) {
+          welcome = <h2>欢迎回来</h2>
+        }else{
+          welcome = <h2>请先登录</h2>
+        }
+       return (
+         <div>
+            {welcome}
+          </div>
+       ) 
+      }
+    }
+    ReactDOM.render(<App/>,document.getElementById('app'));
+  </script>
+</body>
+</html>

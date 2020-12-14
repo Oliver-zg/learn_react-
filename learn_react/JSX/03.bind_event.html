@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: 'Hello World'
+        }
+        // 方法二 
+        this.btnClick = this.btnClick.bind(this);
+      }
+
+      render() {
+        console.log(this);
+       return (
+         <div>
+            {/* 用小驼峰 */} 
+            {/* 方法一  显式绑定*/}         
+            <button onClick={this.btnClick.bind(this)}>显式绑定</button>
+            {/* 方法二  方法使用箭头函数*/}
+            <button onClick={this.Click2}>箭头函数1</button>
+            {/* 方法三  直接传入一个箭头函数，在箭头函数中调用需要执行的函数*/}
+            <button onClick={() => {this.Click3()}}>箭头函数2</button>
+         </div>
+       ) 
+      }
+
+      btnClick() {
+        console.log(this.state.msg);
+      }
+      // 方法3
+      //使用箭头函数，永远不绑定this
+      // 当使用this时，会一层一层往上找
+      Click2 = () => {
+        console.log(this.state.msg);
+      }
+      Click3() {
+        console.log(this.state.msg);
+      }
+    }
+    ReactDOM.render(<App/>,document.getElementById('app'));
+  </script>
+</body>
+</html>

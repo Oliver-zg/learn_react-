@@ -1,0 +1,20 @@
+.tab-control ul{
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  /* display: table;
+  margin: 0 auto; */
+}
+.tab-control ul li {
+  margin: auto;
+  display: inline-block;
+  width: 30%;
+  line-height: 50px;
+  text-align: center;
+}
+
+.active {
+  color: chocolate;
+  border-bottom: 2px solid chocolate;
+}
