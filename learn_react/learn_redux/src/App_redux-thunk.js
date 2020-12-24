@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { getHomeDataAction,fetchHomeDataAction } from './store/home/createActions';
-import { addAction,increAction } from './store/counter/createActions';
+import { addAction, increAction,getHomeDataAction } from './store/createActions';
 import { connect } from 'react-redux';
 
 class App extends PureComponent {
@@ -44,8 +43,8 @@ class App extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counterInfo.counter,
-    banners: state.homeInfo.banners
+    counter: state.counter,
+    banners: state.banners
   }
 };
 const mapDispatchProps = dispatch => {
@@ -56,11 +55,8 @@ const mapDispatchProps = dispatch => {
     addAction: function(num) {
       dispatch(addAction(num));
     },
-    // getHomeData() {
-    //   dispatch(getHomeDataAction)
-    // }
-    getHomeData(){
-      dispatch(fetchHomeDataAction)
+    getHomeData() {
+      dispatch(getHomeDataAction)
     }
   }
 };

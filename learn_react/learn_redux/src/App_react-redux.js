@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-
-import { getHomeDataAction,fetchHomeDataAction } from './store/home/createActions';
-import { addAction,increAction } from './store/counter/createActions';
+import axios  from 'axios'
+import { addAction, increAction,bannersAction } from './store/createActions';
 import { connect } from 'react-redux';
 
 class App extends PureComponent {
@@ -12,7 +11,12 @@ class App extends PureComponent {
     }
   }
   componentDidMount() {
-    this.props.getHomeData()
+    axios({
+      url: 'http://123.207.32.32:8000/home/multidata'
+    }).then(res => {
+      const data = res.data.data
+     this.props.changeBanners(data.banner.list)
+    })
   }
   render() {
     return (
@@ -44,8 +48,8 @@ class App extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counterInfo.counter,
-    banners: state.homeInfo.banners
+    counter: state.counter,
+    banners: state.banners
   }
 };
 const mapDispatchProps = dispatch => {
@@ -56,11 +60,8 @@ const mapDispatchProps = dispatch => {
     addAction: function(num) {
       dispatch(addAction(num));
     },
-    // getHomeData() {
-    //   dispatch(getHomeDataAction)
-    // }
-    getHomeData(){
-      dispatch(fetchHomeDataAction)
+    changeBanners(banners) {
+      dispatch(bannersAction(banners))
     }
   }
 };

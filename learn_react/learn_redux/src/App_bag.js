@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import { getHomeDataAction,fetchHomeDataAction } from './store/home/createActions';
-import { addAction,increAction } from './store/counter/createActions';
-import { connect } from 'react-redux';
+import { addAction, increAction } from './store/createActions';
+import { connect } from './utils/connect';
 
 class App extends PureComponent {
   constructor(props) {
@@ -11,9 +10,7 @@ class App extends PureComponent {
       num: 1
     }
   }
-  componentDidMount() {
-    this.props.getHomeData()
-  }
+
   render() {
     return (
       <div>
@@ -22,14 +19,6 @@ class App extends PureComponent {
         <span>你想加几</span>
         <input type="text" onChange={(e) => this.getNum(e)} />
         <button onClick={() => this.props.addAction(this.state.num)}>+</button>
-        <hr/>
-        <ul>
-          {
-            this.props.banners.map(item => {
-              return <li key={item.acm}>{item.title}</li>
-            })
-          }
-        </ul>
       </div>
     );
   }
@@ -44,8 +33,7 @@ class App extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counterInfo.counter,
-    banners: state.homeInfo.banners
+    counter: state.counter
   }
 };
 const mapDispatchProps = dispatch => {
@@ -55,12 +43,6 @@ const mapDispatchProps = dispatch => {
     },
     addAction: function(num) {
       dispatch(addAction(num));
-    },
-    // getHomeData() {
-    //   dispatch(getHomeDataAction)
-    // }
-    getHomeData(){
-      dispatch(fetchHomeDataAction)
     }
   }
 };
